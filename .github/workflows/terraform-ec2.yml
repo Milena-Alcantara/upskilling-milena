@@ -20,11 +20,12 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.2.0
+          
 
-     - name: Remove lock file and Terraform Init
-        run: |
+      # Passo 3: Inicializar o Terraform
+      - name: Terraform Init
+         run: |
           cd infra/
-          rm -f .terraform.lock.hcl
           terraform init
 
       # Passo 4: Validar o código Terraform
