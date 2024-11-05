@@ -11,11 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Passo 1: Checkout do código
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Passo 2: Configurar o Terraform
+      
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -26,27 +25,26 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1 # Região AWS para o deploy   
-
-      # Passo 3: Inicializar o Terraform
+          aws-region: us-east-1 
+     
       - name: Terraform Init
         run: |
           cd infra/
           terraform init
 
-      # Passo 4: Validar o código Terraform
+     
       - name: Terraform Validate
         run: |
           cd infra/
           terraform validate
 
-      # Passo 5: Planejar o Terraform
+      
       - name: Terraform Plan
         run: |
           cd infra/
           terraform plan -out=tfplan
 
-      # Passo 6: Aplicar o Terraform (criar a EC2)
+     
       - name: Terraform Apply
         id: apply
         if: github.ref == 'refs/heads/main'
