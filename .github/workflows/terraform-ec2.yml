@@ -37,8 +37,8 @@ jobs:
         id: apply
         run: terraform apply -auto-approve
         env:
-          AWS_ACCESS_KEY_ID: "AKIA3SV2ZCZR2YU437FR"
-          AWS_SECRET_ACCESS_KEY: "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"
+          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
 
       # Passo 6: Output do ID da instância EC2 criada
       - name: Output EC2 Instance ID
