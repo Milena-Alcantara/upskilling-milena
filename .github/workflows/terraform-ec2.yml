@@ -21,16 +21,10 @@ jobs:
         with:
           terraform_version: 1.2.0
 
-      # Passo 3: Remover o arquivo de lock e inicializar o Terraform
-      - name: Remove lock file and Terraform Init
+     - name: Remove lock file and Terraform Init
         run: |
           cd infra/
           rm -f .terraform.lock.hcl
-          
-      # Passo 3: Inicializar o Terraform
-      - name: Terraform Init
-         run: |
-          cd infra/
           terraform init
 
       # Passo 4: Validar o código Terraform
