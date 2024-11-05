@@ -17,9 +17,16 @@ jobs:
 
       # Passo 2: Configurar o Terraform
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.2.0
+          terraform_version: 1.5.5
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1 # Região AWS para o deploy   
 
       # Passo 3: Inicializar o Terraform
       - name: Terraform Init
@@ -42,9 +49,8 @@ jobs:
       # Passo 6: Aplicar o Terraform (criar a EC2)
       - name: Terraform Apply
         id: apply
+        if: github.ref == 'refs/heads/main'
         run: |
           cd infra/
           terraform apply -auto-approve
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      
