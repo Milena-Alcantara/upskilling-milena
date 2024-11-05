@@ -42,4 +42,4 @@ jobs:
 
       # Passo 6: Output do ID da instância EC2 criada
       - name: Output EC2 Instance ID
-        run: echo "EC2 Instance ID: $(terraform output instance_id)"
+        run: echo "EC2 Instance ID: ${{ steps.apply.outputs.instance_id }}"

@@ -22,3 +22,7 @@ resource "aws_instance" "ec2-example" {
     description = var.instance_description
   }
 }
+
+output "instance_id" {
+  value = aws_instance.ec2-example.id
+}
