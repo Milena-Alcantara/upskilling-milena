@@ -30,8 +30,9 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan -out=tfplan  
-
+        run: |
+          cd infra/
+          terraform plan -out=tfplan
       # Passo 5: Aplicar o Terraform (criar a EC2)
       - name: Terraform Apply
         id: apply
