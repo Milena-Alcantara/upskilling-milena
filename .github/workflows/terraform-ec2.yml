@@ -20,7 +20,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.2.0
-          
+
       # Passo 3: Inicializar o Terraform
       - name: Terraform Init
         run: |
